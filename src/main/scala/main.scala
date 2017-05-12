@@ -3,13 +3,11 @@ import java.util.{Calendar, Date}
 
 import scala.util.Random
 
-object Main {
+object main {
 
   def main(args: Array[String]): Unit ={
 
-    val simulation: Simulation = new Simulation()
-
-    simulation.execute
+    new Simulation().execute
 
   }
 }

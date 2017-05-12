@@ -30,5 +30,9 @@ class Question {
     this
   }
 
+  def reject(question: Question) ={
+    this
+  }
+
   def acceptValue = function(firstValue, secondValue)
 }
