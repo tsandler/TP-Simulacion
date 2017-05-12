@@ -8,14 +8,14 @@ class Question {
     this.result = function(firstValue, secondValue)
   }
 
-  def accept(action: () => Unit) ={
+  def accept(action: () => Unit): Question ={
     if (result){
       action.apply()
     }
     this
   }
 
-  def reject(action: () => Unit) ={
+  def reject(action: () => Unit): Question ={
     if (!result){
       action.apply()
     }

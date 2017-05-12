@@ -15,10 +15,10 @@ class Time {
   }
 
   def isRushHour: Boolean = {
-    val nine =  new Time("09:00")
-    val eleven =  new Time("11:00")
-    val four =  new Time("16:00")
-    val six =  new Time("18:00")
+    val nine =  variables.generateTime("09:00")
+    val eleven =  variables.generateTime("11:00")
+    val four =  variables.generateTime("16:00")
+    val six =  variables.generateTime("18:00")
     between(nine, eleven) || between (four, six)
   }
 

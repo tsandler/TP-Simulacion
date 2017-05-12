@@ -14,10 +14,9 @@ object variables {
   }
 
   def initialize: Unit ={
-    TPR = new Time("09:00")
-    time = new Time("09:00")
-    TPCM = new Time("09:00")
-    TPCJ = new Time("09:00")
+    TPR = this.generateTime("09:00")
+    TPCM = this.generateTime("09:00")
+    TPCJ = this.generateTime("09:00")
     waste = 0
     chargeCoffe
     consume = 0
@@ -38,11 +37,16 @@ object variables {
   }
 
   def verifyDateChange: Unit ={
-    val finalTime = new Time("18:00")
+    val finalTime = this.generateTime("18:00")
     if (variables.TPCJ.getTime > finalTime.getTime && variables.TPCM.getTime > finalTime.getTime) {
-      variables.TPCJ = new Time("09:00")
-      variables.TPCM = new Time("09:00")
+      variables.TPCJ = this.generateTime("09:00")
+      variables.TPCM = this.generateTime("09:00")
+      variables.TPR = this.generateTime("09:00")
       variables.changeDay = true
     }
+  }
+
+  def generateTime(time: String): Time ={
+    new Time(time)
   }
 }

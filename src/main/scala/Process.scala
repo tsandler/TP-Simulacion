@@ -39,7 +39,6 @@ class Process {
   }
 
   def recharge: Unit ={
-    variables.time = variables.TPR
     variables.waste += variables.CDM + variables.CDJ
     variables.TPR.addMinutes(variables.VC)
     variables.chargeCoffe
