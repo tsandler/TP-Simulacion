@@ -2,7 +2,7 @@
 
 object higherOrder {
 
-  def higherOrEqual(firstValue: Long, secondValue: Long): Boolean ={
+  def greaterOrEqual(firstValue: Long, secondValue: Long): Boolean ={
     firstValue >= secondValue
   }
 

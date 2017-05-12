@@ -25,7 +25,7 @@ class Process {
     }
     variables.consume = new Random().nextInt(50) + 50
 
-    new Question(higherOrder.higherOrEqual, available, variables.consume)
+    new Question(higherOrder.greaterOrEqual, available, variables.consume)
       .accept(() => variables.consume(machine))
       .reject(() => variables.cantConsume)
 

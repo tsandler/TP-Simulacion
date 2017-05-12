@@ -8,7 +8,7 @@ class Simulation {
   var question: Question =_
 
   def execute: Unit = {
-    while (variables.VC < 300){
+    while (variables.VC < 600){
       variables.initialize
       var day = 0
       variables.VC += 60
