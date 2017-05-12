@@ -24,7 +24,7 @@ class Process {
       variables.TPCJ.addMinutes(generateIC(TPC))
     variables.consume = new Random().nextInt(50) + 50
 
-    new Question(higherOrder.less, available, variables.consume)
+    new Question(higherOrder.higherOrEqual, available, variables.consume)
       .accept(() => variables.consume(machine))
       .reject(() => variables.cantConsume(machine))
 
