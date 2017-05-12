@@ -1,6 +1,6 @@
 
 object variables {
-  var consumo: Int =_
+  var consume: Int =_
   var VC = 0 //mins
   var CDM: Int =_
   var CDJ: Int =_
@@ -20,9 +20,33 @@ object variables {
     TPCJ = new Time("09:00")
     waste = 0
     chargeCoffe
-    consumo = 0
+    consume = 0
     Q = 0
     TPR.addMinutes(VC)
   }
   var changeDay = false
+
+  def consume(machine: Boolean): Unit ={
+    if (machine)
+      CDM -= consume
+    else
+      CDJ -= consume
+  }
+
+  def cantConsume(machine: Boolean): Unit ={
+    if (machine)
+      CDM = 0
+    else
+      CDJ = 0
+    Q += 1
+  }
+
+  def verifyDateChange: Unit ={
+    val finalTime = new Time("18:00")
+    if (variables.TPCJ.getTime > finalTime.getTime && variables.TPCM.getTime > finalTime.getTime) {
+      variables.TPCJ = new Time("09:00")
+      variables.TPCM = new Time("09:00")
+      variables.changeDay = true
+    }
+  }
 }

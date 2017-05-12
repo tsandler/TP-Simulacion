@@ -15,35 +15,22 @@ class Process {
   }
 
   def drink(machine: Boolean): Unit ={
-    var consume = variables.CDJ
+    var available = variables.CDJ
     if (machine)
-      consume = variables.CDM
+      available = variables.CDM
     if (machine)
       variables.TPCM.addMinutes(generateIC(TPC))
     else
       variables.TPCJ.addMinutes(generateIC(TPC))
-    variables.consumo = new Random().nextInt(50) + 50
+    variables.consume = new Random().nextInt(50) + 50
 
-    new Question(higherOrder.higherOrEqual, variables.consumo, consume).accept(() => {
-      if (machine)
-        variables.CDM = 0
-      else
-        variables.CDJ = 0
-      variables.Q += 1
-    }).reject(() => {
-      if (machine)
-        variables.CDM -= variables.consumo
-      else
-        variables.CDJ -= variables.consumo
-    })
+    new Question(higherOrder.less, available, variables.consume)
+      .accept(() => variables.consume(machine))
+      .reject(() => variables.cantConsume(machine))
 
-    var finalTime = new Time("18:00")
-    if (variables.TPCJ.getTime > finalTime.getTime && variables.TPCM.getTime > finalTime.getTime) {
-      variables.TPCJ = new Time("09:00")
-      variables.TPCM = new Time("09:00")
-      variables.changeDay = true
-    }
+    variables.verifyDateChange
   }
+
   def generateIC(time: Time): Int ={
     if (time.isRushHour)
       return new Random().nextInt(15)
