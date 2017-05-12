@@ -26,7 +26,7 @@ class Process {
 
     new Question(higherOrder.higherOrEqual, available, variables.consume)
       .accept(() => variables.consume(machine))
-      .reject(() => variables.cantConsume(machine))
+      .reject(() => variables.cantConsume)
 
     variables.verifyDateChange
   }

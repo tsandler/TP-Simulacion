@@ -15,15 +15,15 @@ class Time {
   }
 
   def isRushHour: Boolean = {
-    var nine =  new Time("09:00")
-    var eleven =  new Time("11:00")
-    var four =  new Time("16:00")
-    var six =  new Time("18:00")
+    val nine =  new Time("09:00")
+    val eleven =  new Time("11:00")
+    val four =  new Time("16:00")
+    val six =  new Time("18:00")
     between(nine, eleven) || between (four, six)
   }
 
   def between(begin: Time, end: Time): Boolean ={
-    time.after(begin.time) && time.before(end.time)
+    time.getTime >= begin.getTime && time.getTime <= end.getTime
   }
 
   def greaterThan(otherTime: Time): Boolean ={

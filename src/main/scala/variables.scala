@@ -33,11 +33,7 @@ object variables {
       CDJ -= consume
   }
 
-  def cantConsume(machine: Boolean): Unit ={
-    if (machine)
-      CDM = 0
-    else
-      CDJ = 0
+  def cantConsume: Unit ={
     Q += 1
   }
 
