@@ -10,18 +10,19 @@ class Process {
       TPC = variables.TPCM
 
     new Question(higherOrder.less, TPC.getTime, variables.TPR.getTime)
-      .accept(() => {this.drink(machine)})
-      .reject(() => {this.recharge})
+      .accept(() => this.drink(machine))
+      .reject(() => this.recharge)
   }
 
   def drink(machine: Boolean): Unit ={
-    var available = variables.CDJ
-    if (machine)
+    var available = 0
+    if (machine) {
       available = variables.CDM
-    if (machine)
       variables.TPCM.addMinutes(generateIC(TPC))
-    else
+    }else{
+      available = variables.CDJ
       variables.TPCJ.addMinutes(generateIC(TPC))
+    }
     variables.consume = new Random().nextInt(50) + 50
 
     new Question(higherOrder.higherOrEqual, available, variables.consume)
@@ -33,8 +34,8 @@ class Process {
 
   def generateIC(time: Time): Int ={
     if (time.isRushHour)
-      return new Random().nextInt(15)
-    new Random().nextInt(40) + 10
+      return new Random().nextInt(7)
+    new Random().nextInt(30) + 10
   }
 
   def recharge: Unit ={
