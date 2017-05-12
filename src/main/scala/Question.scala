@@ -19,18 +19,10 @@ class Question {
     this
   }
 
-  def accept(question: Question) ={
-    this
-  }
-
   def reject(action: () => Unit) ={
     if (!acceptValue){
       action.apply()
     }
-    this
-  }
-
-  def reject(question: Question) ={
     this
   }
 

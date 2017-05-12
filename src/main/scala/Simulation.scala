@@ -8,14 +8,14 @@ class Simulation {
   var question: Question =_
 
   def execute: Unit = {
-    while (variables.VC < 600){
+    while (variables.VC < 300){
       variables.initialize
       var day = 0
       variables.VC += 60
       while (day < 730) {
         new Question(higherOrder.less, variables.TPCM.getTime, variables.TPCJ.getTime)
-          .accept(new Process().consume(true))
-          .reject(new Process().consume(false))
+          .accept(() => new Process().consume(true))
+          .reject(() => new Process().consume(false))
         if (variables.changeDay) {
           day += 1
           variables.changeDay = false

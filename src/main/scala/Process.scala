@@ -2,9 +2,14 @@ import scala.util.Random
 
 class Process {
 
+  var TPC: Time =_
 
-  def consume(machine: Boolean): Question ={
-    new Question(higherOrder.less, variables.TPC.getTime, variables.TPR.getTime)
+  def consume(machine: Boolean): Unit ={
+    TPC = variables.TPCJ
+    if (machine)
+      TPC = variables.TPCM
+
+    new Question(higherOrder.less, TPC.getTime, variables.TPR.getTime)
       .accept(() => {this.drink(machine)})
       .reject(() => {this.recharge})
   }
@@ -13,11 +18,13 @@ class Process {
     var consume = variables.CDJ
     if (machine)
       consume = variables.CDM
-    variables.time = variables.TPC
-    variables.IC = generateIC(variables.time)
-    variables.TPC.addMinutes(variables.IC)
+    if (machine)
+      variables.TPCM.addMinutes(generateIC(TPC))
+    else
+      variables.TPCJ.addMinutes(generateIC(TPC))
     variables.consumo = new Random().nextInt(50) + 50
-    new Question(higherOrder.higherOrEqual, variables.consumo, variables.CDM).accept(() => {
+
+    new Question(higherOrder.higherOrEqual, variables.consumo, consume).accept(() => {
       if (machine)
         variables.CDM = 0
       else
@@ -29,19 +36,18 @@ class Process {
       else
         variables.CDJ -= variables.consumo
     })
-    if (variables.TPC.getTime > new Time("18:00").getTime) {
-      variables.TPC = new Time("09:00")
+
+    var finalTime = new Time("18:00")
+    if (variables.TPCJ.getTime > finalTime.getTime && variables.TPCM.getTime > finalTime.getTime) {
+      variables.TPCJ = new Time("09:00")
+      variables.TPCM = new Time("09:00")
       variables.changeDay = true
     }
-    if (machine)
-      variables.TPCM = variables.TPC
-    else
-      variables TPCJ = variables.TPC
   }
   def generateIC(time: Time): Int ={
     if (time.isRushHour)
-      return new Random().nextInt(5)
-    new Random().nextInt(20) + 10
+      return new Random().nextInt(15)
+    new Random().nextInt(40) + 10
   }
 
   def recharge: Unit ={
